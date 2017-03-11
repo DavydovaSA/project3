@@ -50,7 +50,7 @@ df.test <- Auto.1[-inTrain, -1]
 
 Размерность обучающей выборки: $n = `r dim(df.train)[1]`$ строк, $p = `r dim(df.train)[2] - 1`$ объясняющих переменных. Зависимая переменная -- `mpg`.  
 
-```{r Описание данных, echo = F, message = F, warning = F}
+```{r Описание данных, message = F, warning = F}
 # описательные статистики по переменным
 summary(df.train)
 
@@ -65,7 +65,7 @@ ggpairs(df.train[, c('weight', 'cylinders', 'acceleration', 'year')],
 
 ## Модели  
 
-```{r echo = F, warning = F, error = F}
+```{r warning = F, error = F}
 
 model.1 <- lm(mpg ~ . + cylinders:weight + cylinders:acceleration + cylinders:year,
               data = df.train)
@@ -75,7 +75,7 @@ summary(model.1)
 
 Совместное влияние `weight:cylinders ` исключаем, т.к. параметры незначимы.
 
-```{r echo = F, warning = F, error = F}
+```{r warning = F, error = F}
 
 model.2 <- lm(mpg ~ . + cylinders:acceleration + cylinders:year,
               data = df.train)
@@ -86,7 +86,7 @@ summary(model.2)
 Взаимодействие `acceleration:cylinders` также исключаем в связи с незначимостью параметров.
 
 
-```{r echo = F, warning = F, error = F}
+```{r warning = F, error = F}
 
 model.3 <- lm(mpg ~ . + cylinders:year,
               data = df.train)
@@ -96,7 +96,7 @@ summary(model.3)
 
 Коэффициент при `cylinders4` наименее значимый.
 
-```{r echo = F, warning = F, error = F}
+```{r warning = F, error = F}
 
 model.4 <- lm(mpg ~ weight + acceleration + year,
               data = df.train)
@@ -106,7 +106,7 @@ summary(model.4)
 
 Коэффициент при `acceleration` не значим. Перестраиваем модель.
 
-```{r echo = F, warning = F, error = F}
+```{r warning = F, error = F}
 
 model.5 <- lm(mpg ~ weight + year,
               data = df.train)
@@ -118,7 +118,7 @@ summary(model.5)
 
 # Проверка остатков  
 
-```{r echo = F, warning = F, error = F}
+```{r warning = F, error = F}
 # тест Бройша-Пагана
 bptest(model.5)
 
@@ -139,7 +139,7 @@ par(mfrow = c(1, 1))
 
 # Сравнение с kNN
 
-```{r echo = F}
+```{r }
 # фактические значения y на тестовой выборке
 y.fact <- Auto.1[-inTrain, 1]
 y.model.lm <- predict(model.5, df.test)
