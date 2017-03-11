@@ -1,6 +1,6 @@
 ---
 title: "Упражнение 3"
-author: ""
+author: "Давыдова С.А."
 date: '25 февраля 2017 г '
 output: html_document
 ---
